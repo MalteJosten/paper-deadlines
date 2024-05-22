@@ -1,0 +1,39 @@
+{
+    "conferences": {
+        "S&P 2024": {
+            "name": "Symposium on Security and Privacy 2024",
+            "society": "IEEE",
+            "deadlines": [
+
+            ]
+        },
+        "ICDF2C 2024": {
+            "name": "International Conference on Digital Forensics and Cyber Crime 2024",
+            "society": "EAI",
+            "deadlines": [
+
+            ]
+        },
+        "USENIX 2025": {
+            "name": "USENIX Security Symposium 2025",
+            "society": "USENIX",
+            "deadlines": [
+
+            ]
+        },
+        "ICISSP 2025": {
+            "name": "International Conference on Information Systems Security and Privacy 2025",
+            "society": "INSTICC",
+            "deadlines": [
+
+            ]
+        },
+        "Euro S&P 2025": {
+            "name": "IEEE European Symposium on Security and Privacy 2025",
+            "society": "IEEE",
+            "deadlines": [
+
+            ]
+        }
+    }
+}
