@@ -1,0 +1,53 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#heading {
+    width: 100%;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.divider {
+    border-top: solid 1px black;
+    width: 75%;
+    margin: 10px auto;
+}
+
+.conf-div {
+    width: 20%;
+    border: solid 2px grey;
+    text-align: center; 
+    margin: 1em;
+    padding: 0 0.5em;
+}
+
+.conf-abbrv {
+}
+
+.conf-title {
+
+}
+
+.society {
+    margin-right: 0.25em;
+}
+
+.conf-link {
+    display: block;
+}
+
+.days-left {
+    font-size: 3em;
+    font-weight: 800;
+    color: red;
+    margin: 0;
+}
+
+.dl-date {
+    font-weight: 800;
+}
+
+.deadline-desc {
+
+}

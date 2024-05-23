@@ -2,37 +2,69 @@
     "conferences": {
         "S&P 2024": {
             "name": "Symposium on Security and Privacy 2024",
+            "link": "https://sp2024.ieee-security.org/",
             "society": "IEEE",
             "deadlines": [
-
+                {
+                    "date": "2024-06-06",
+                    "desc": "first deadline"
+                },
+                {
+                    "date": "2024-11-14",
+                    "desc": "second deadline"
+                }
             ]
         },
         "ICDF2C 2024": {
             "name": "International Conference on Digital Forensics and Cyber Crime 2024",
+            "link": "https://icdf2c.eai-conferences.org/2024/",
             "society": "EAI",
             "deadlines": [
-
+                {
+                    "date": "2024-07-10",
+                    "desc": "first deadline"
+                }
             ]
         },
         "USENIX 2025": {
             "name": "USENIX Security Symposium 2025",
+            "link": "https://www.usenix.org/conference/usenixsecurity25",
             "society": "USENIX",
             "deadlines": [
-
+                {
+                    "date": "2024-09-04",
+                    "desc": "first deadline"
+                },
+                {
+                    "date": "2025-01-22",
+                    "desc": "second deadline"
+                }
             ]
         },
         "ICISSP 2025": {
             "name": "International Conference on Information Systems Security and Privacy 2025",
+            "link": "https://icissp.scitevents.org/Home.aspx",
             "society": "INSTICC",
             "deadlines": [
-
+                {
+                    "date": "2024-10-02",
+                    "desc": "first deadline"
+                },
+                {
+                    "date": "2024-12-18",
+                    "desc": "second deadline"
+                }
             ]
         },
         "Euro S&P 2025": {
             "name": "IEEE European Symposium on Security and Privacy 2025",
+            "link": "https://eurosp2025.ieee-security.org/cfp.html",
             "society": "IEEE",
             "deadlines": [
-
+                {
+                    "date": "2024-11-01",
+                    "desc": "first deadline"
+                }
             ]
         }
     }
