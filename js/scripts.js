@@ -1,7 +1,9 @@
 const counters = document.getElementById("counters");
 
-const divider = document.createElement("div");
-divider.classList.add("divider");
+const confDivider = document.createElement("div");
+confDivider.classList.add("divider");
+const dlDivider = document.createElement("div");
+dlDivider.classList.add("dl-divider");
 
 const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -12,14 +14,20 @@ fetch("../data/conferences.json")
         for (let confId in confData.conferences) {
             let conference = confData.conferences[confId];
 
-            const div = document.createElement("div");
-            div.classList.add("conf-div");
+            const card = document.createElement("div");
+            card.classList.add("conf-card");
+
+            /*
+            *  Conference Info
+            */
+            const info = document.createElement("div");
+            info.classList.add("conf-info");
 
             const pAbbrv = document.createElement("h2");
             pAbbrv.classList.add("conf-abbrv");
             const abbrv = document.createTextNode(confId);
             pAbbrv.appendChild(abbrv);
-            div.appendChild(pAbbrv);
+            info.appendChild(pAbbrv);
 
             const confTitle = document.createElement("p");
             confTitle.classList.add("conf-title");
@@ -28,27 +36,30 @@ fetch("../data/conferences.json")
             spanSociety.innerText = conference.society;
             confTitle.appendChild(spanSociety);
             confTitle.appendChild(document.createTextNode(conference.name));
-            div.appendChild(confTitle);
-
-            counters.appendChild(div);
+            info.appendChild(confTitle);
 
             const link = document.createElement("a");
             link.classList.add("conf-link");
             link.href = conference.link;
             link.target = "_blank";
             link.innerText = "website";
-            div.appendChild(link);
+            info.appendChild(link);
 
-            div.appendChild(divider.cloneNode(true));
+            card.appendChild(info);
+            card.appendChild(confDivider.cloneNode(true));
     
+            /*
+            *  Conference Deadlines
+            */
             const dls = document.createElement("div");
             dls.classList.add("dls");
 
-            for (let dId in conference.deadlines) {
+            for (let dIdx in conference.deadlines) {
                 const dlDiv = document.createElement("div");
                 dlDiv.classList.add("dl-wrapper");
 
-                let dl = conference.deadlines[dId];
+                // date formatting
+                let dl = conference.deadlines[dIdx];
                 const date = new Date(dl.date);
                 let month = "0" + (date.getMonth()+1);
                 month = month.substring(month.length - 2);
@@ -60,10 +71,25 @@ fetch("../data/conferences.json")
                 dlDate.classList.add("dl-date");
                 dlDate.innerText = dateString;
 
+                // Description
                 const desc = document.createElement("p");
                 desc.classList.add("deadline-desc");
                 desc.innerText = dl.desc;
 
+                // Deadline Display + Controls
+                const timeWrapper = document.createElement("table");
+                timeWrapper.classList.add("time-wrapper");
+                const timeEntry = document.createElement("tr");
+                const valueColumn = document.createElement("td");
+                valueColumn.classList.add("valueColumn");
+                const switchColumn = document.createElement("td");
+                switchColumn.classList.add("switchColumn");
+                timeEntry.appendChild(valueColumn);
+                timeEntry.appendChild(switchColumn);
+
+                timeWrapper.appendChild(timeEntry);
+
+                // Deadline Time/Display
                 let timeDiff = date.getTime() - new Date().getTime();
                 let daysLeftValue = Math.round(timeDiff / (1000 * 3600 * 24));
                 let weeksLeftValue = (daysLeftValue / 7).toFixed(1);
@@ -79,10 +105,11 @@ fetch("../data/conferences.json")
                 monthsLeft.classList.add("time-left", "monthsLeft", "hide");
                 monthsLeft.innerText = monthsLeftValue;
 
-                dlDiv.appendChild(daysLeft);
-                dlDiv.appendChild(weeksLeft);
-                dlDiv.appendChild(monthsLeft);
+                valueColumn.appendChild(daysLeft);
+                valueColumn.appendChild(weeksLeft);
+                valueColumn.appendChild(monthsLeft);
 
+                // Deadline Controls
                 const switches = document.createElement("ul");
                 switches.classList.add("time-switch-group");
                 const switchItem = document.createElement("li");
@@ -94,7 +121,9 @@ fetch("../data/conferences.json")
                 for (let idx in switchLabels) {
                     const switchButton = timeSwitch.cloneNode(true);
                     switchButton.innerHTML = switchLabels[idx];
-                    switchButton.addEventListener("click", function() {changeTimeLeft(switchLabels[idx], dlDiv, switches)});
+                    switchButton.addEventListener(
+                        "click",
+                        function() {changeTimeLeft(switchLabels[idx], valueColumn, switches)});
                     if (switchLabels[idx] == "days") {
                         switchButton.classList.add("active");
                     } else {
@@ -107,19 +136,28 @@ fetch("../data/conferences.json")
                     switches.appendChild(switchListItem);
                 }
 
-                dlDiv.appendChild(switches);
+                switchColumn.appendChild(switches);
+
+                // Assemble everything
+                dlDiv.appendChild(timeWrapper);
                 dlDiv.appendChild(dlDate);
                 dlDiv.appendChild(desc);
 
                 dls.appendChild(dlDiv);
+
+                if (dIdx < conference.deadlines.length - 1) {
+                    dls.appendChild(dlDivider.cloneNode(true));
+                }
             }
 
-            div.appendChild(dls)
+            card.appendChild(dls)
+            counters.appendChild(card);
         }
     });
 
-function changeTimeLeft(selection, timerParentNode, switchGroup) {
-    let timerChildren = timerParentNode.children;
+function changeTimeLeft(selection, valueColumn, switchGroup) {
+    // Update time display
+    let timerChildren = valueColumn.children;
 
     for (let idx in timerChildren) {
         let child = timerChildren[idx];
@@ -137,6 +175,7 @@ function changeTimeLeft(selection, timerParentNode, switchGroup) {
         }
     }
 
+    // Update switches
     let switches = switchGroup.children;
 
     for (let idx = 0; idx < switches.length; idx++) {

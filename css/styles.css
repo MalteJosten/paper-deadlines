@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #fffdf9;
 }
 
 #heading {
@@ -9,9 +10,14 @@ body {
 }
 
 .divider {
+    border-top: solid 2px grey;
+    margin: 10px auto;
+}
+
+.dl-divider {
     border-top: solid 1px black;
     width: 75%;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 #counters {
@@ -20,13 +26,17 @@ body {
     justify-content: space-evenly;
 }
 
-.conf-div {
+.conf-card {
     width: 20%;
     min-width: 200px;
     max-width: 300px;
     border: solid 2px grey;
     text-align: center; 
     margin: 1em;
+    background-color: #f1f1f1;
+}
+
+.conf-info {
     padding: 0 0.5em;
 }
 
@@ -45,11 +55,56 @@ body {
     display: block;
 }
 
+.time-wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.valueColumn {
+    width: 45%;
+    text-align: right;
+    padding-right: 1em;
+}
+
+.switchColumn {
+    width: 30%;
+    text-align: left;
+}
+
 .time-left {
-    font-size: 3em;
+    font-size: 4em;
     font-weight: 800;
     color: red;
     margin: 0;
+}
+
+.time-switch-group {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    text-align: left;
+}
+
+.time-display-switch {
+    border: none;
+    background-color: transparent;
+}
+
+.time-display-switch:active {
+    color: red;
+}
+
+.time-display-switch:hover {
+    color: darkred;
+}
+
+.dl-date {
+    font-weight: 800;
+}
+
+.deadline-desc {
+
 }
 
 .show {
@@ -61,38 +116,10 @@ body {
 }
 
 .active {
-    color: red;
+    color: red !important;
+    font-weight: 600;
 }
 
 .inactive {
     color: black;
-}
-
-.time-switch-group {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.time-switch-group > li {
-
-    display: inline-block;
-}
-
-.time-display-switch {
-    border: none;
-    background-color: transparent;
-    text-decoration: underline;
-}
-
-.time-display-switch:active {
-    color: red;
-}
-
-.dl-date {
-    font-weight: 800;
-}
-
-.deadline-desc {
-
 }
