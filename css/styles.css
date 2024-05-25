@@ -14,8 +14,16 @@ body {
     margin: 10px auto;
 }
 
+#counters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 .conf-div {
     width: 20%;
+    min-width: 200px;
+    max-width: 300px;
     border: solid 2px grey;
     text-align: center; 
     margin: 1em;
@@ -37,11 +45,48 @@ body {
     display: block;
 }
 
-.days-left {
+.time-left {
     font-size: 3em;
     font-weight: 800;
     color: red;
     margin: 0;
+}
+
+.show {
+    display: inline-block;
+}
+
+.hide {
+    display: none;
+}
+
+.active {
+    color: red;
+}
+
+.inactive {
+    color: black;
+}
+
+.time-switch-group {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.time-switch-group > li {
+
+    display: inline-block;
+}
+
+.time-display-switch {
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.time-display-switch:active {
+    color: red;
 }
 
 .dl-date {

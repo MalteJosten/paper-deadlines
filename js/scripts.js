@@ -64,11 +64,50 @@ fetch("../data/conferences.json")
                 desc.classList.add("deadline-desc");
                 desc.innerText = dl.desc;
 
+                let timeDiff = date.getTime() - new Date().getTime();
+                let daysLeftValue = Math.round(timeDiff / (1000 * 3600 * 24));
+                let weeksLeftValue = (daysLeftValue / 7).toFixed(1);
+                let monthsLeftValue = (daysLeftValue / 30).toFixed(1);
+
                 const daysLeft = document.createElement("p");
-                daysLeft.classList.add("days-left");
-                daysLeft.innerText = "XX";
+                daysLeft.classList.add("time-left", "daysLeft", "show");
+                daysLeft.innerText = daysLeftValue;
+                const weeksLeft = document.createElement("p");
+                weeksLeft.classList.add("time-left", "weeksLeft", "hide");
+                weeksLeft.innerText = weeksLeftValue;
+                const monthsLeft = document.createElement("p");
+                monthsLeft.classList.add("time-left", "monthsLeft", "hide");
+                monthsLeft.innerText = monthsLeftValue;
 
                 dlDiv.appendChild(daysLeft);
+                dlDiv.appendChild(weeksLeft);
+                dlDiv.appendChild(monthsLeft);
+
+                const switches = document.createElement("ul");
+                switches.classList.add("time-switch-group");
+                const switchItem = document.createElement("li");
+                const timeSwitch = document.createElement("button");
+                timeSwitch.classList.add("time-display-switch");
+
+                const switchLabels = ["days", "weeks", "months"];
+
+                for (let idx in switchLabels) {
+                    const switchButton = timeSwitch.cloneNode(true);
+                    switchButton.innerHTML = switchLabels[idx];
+                    switchButton.addEventListener("click", function() {changeTimeLeft(switchLabels[idx], dlDiv, switches)});
+                    if (switchLabels[idx] == "days") {
+                        switchButton.classList.add("active");
+                    } else {
+                        switchButton.classList.add("inactive");
+                    }
+
+                    const switchListItem = switchItem.cloneNode(true);
+                    switchListItem.appendChild(switchButton);
+
+                    switches.appendChild(switchListItem);
+                }
+
+                dlDiv.appendChild(switches);
                 dlDiv.appendChild(dlDate);
                 dlDiv.appendChild(desc);
 
@@ -78,3 +117,36 @@ fetch("../data/conferences.json")
             div.appendChild(dls)
         }
     });
+
+function changeTimeLeft(selection, timerParentNode, switchGroup) {
+    let timerChildren = timerParentNode.children;
+
+    for (let idx in timerChildren) {
+        let child = timerChildren[idx];
+
+        if (child.classList) {
+            if (child.classList.contains("time-left")) {
+                if (child.classList.contains(selection + "Left")) {
+                    child.classList.remove("hide");
+                    child.classList.add("show");
+                } else {
+                    child.classList.remove("show");
+                    child.classList.add("hide");
+                }
+            }
+        }
+    }
+
+    let switches = switchGroup.children;
+
+    for (let idx = 0; idx < switches.length; idx++) {
+        labelSwitch = switches[idx].children[0];
+        if (labelSwitch.innerHTML == selection) {
+            labelSwitch.classList.remove("inactive");
+            labelSwitch.classList.add("active");
+        } else {
+            labelSwitch.classList.remove("active");
+            labelSwitch.classList.add("inactive");
+        }
+    }
+}
