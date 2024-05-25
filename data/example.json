@@ -1,0 +1,19 @@
+{
+    "conferences": {
+        "S&P 2024": {
+            "name": "Symposium on Security and Privacy 2025",
+            "link": "https://sp2025.ieee-security.org/",
+            "society": "IEEE",
+            "deadlines": [
+                {
+                    "date": "2024-06-06",
+                    "desc": "Full Paper (1. Deadline)"
+                },
+                {
+                    "date": "2024-11-14",
+                    "desc": "Full Paper (2. Deadline)"
+                }
+            ]
+        }
+    }
+}
